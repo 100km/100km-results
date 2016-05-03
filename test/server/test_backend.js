@@ -151,7 +151,7 @@
 
         describe('callCouchDB', function(){
             it('should retrieve checkpoints for bib 100', function(done) {
-                var url = "/_design/search/_view/all-times-per-bib?startkey=%5B100%2Cnull%5D&endkey=%5B100%2C4%5D&inclusive_end=false";
+                var url = "/_design/search/_view/all-times-per-bib-ng?startkey=%5B100%2Cnull%5D&endkey=%5B100%2C4%5D&inclusive_end=false";
                 backend.callCouchDB(url, function(data) {
                     mockedCallCouchDB(url, function(expectedData) {
                         assert.deepEqual(data, expectedData);
@@ -160,7 +160,7 @@
                 });
             });
             it('should retrieve checkpoints for bib 40', function(done) {
-                var url = "/_design/search/_view/all-times-per-bib?startkey=%5B40%2Cnull%5D&endkey=%5B40%2C4%5D&inclusive_end=false";
+                var url = "/_design/search/_view/all-times-per-bib-ng?startkey=%5B40%2Cnull%5D&endkey=%5B40%2C4%5D&inclusive_end=false";
                 backend.callCouchDB(url, function(data) {
                     mockedCallCouchDB(url, function(expectedData) {
                         assert.deepEqual(data, expectedData);
@@ -221,11 +221,11 @@
         var jsonResponse = {};
         switch (uri) {
             // checkpoints
-            case "/_design/search/_view/all-times-per-bib?startkey=%5B100%2Cnull%5D&endkey=%5B100%2C4%5D&inclusive_end=false":
+            case "/_design/search/_view/all-times-per-bib-ng?startkey=%5B100%2Cnull%5D&endkey=%5B100%2C4%5D&inclusive_end=false":
                 jsonResponse = {"rows":[{"key":[100,1,1],"value":1390337566986},{"key":[100,1,2],"value":1390337584343},{"key":[100,2,1],"value":1390338757392}]};
                 break;
 
-            case "/_design/search/_view/all-times-per-bib?startkey=%5B40%2Cnull%5D&endkey=%5B40%2C4%5D&inclusive_end=false":
+            case "/_design/search/_view/all-times-per-bib-ng?startkey=%5B40%2Cnull%5D&endkey=%5B40%2C4%5D&inclusive_end=false":
                 jsonResponse = {"rows":[{"key":[40,1,1],"value":1390337566986},{"key":[40,1,2],"value":1390338257392}]};
                 break;
 

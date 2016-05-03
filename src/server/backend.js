@@ -74,7 +74,7 @@
 
     var retrieveCheckpoints = function(bib, callback) {
         /*
-            calling "http://localhost:5984/steenwerck100km/_design/search/_view/all-times-per-bib?startkey=%5B100%2Cnull%5D&endkey=%5B100%2C4%5D&inclusive_end=false":
+            calling "http://localhost:5984/steenwerck100km/_design/search/_view/all-times-per-bib-ng?startkey=%5B100%2Cnull%5D&endkey=%5B100%2C4%5D&inclusive_end=false":
             returns {"rows":[{"key":[100,1,1],"value":1390337566986},{"key":[100,1,2],"value":1390338757392},{"key":[100,2,1],"value":1390337584343}]};
             -> return {
                 "bib": 100,
@@ -94,7 +94,7 @@
                 ]
             };
         */
-        var url = "/_design/search/_view/all-times-per-bib?startkey=%5B"+bib+"%2Cnull%5D&endkey=%5B"+bib+"%2C4%5D&inclusive_end=false";
+        var url = "/_design/search/_view/all-times-per-bib-ng?startkey=%5B"+bib+"%2Cnull%5D&endkey=%5B"+bib+"%2C4%5D&inclusive_end=false";
         exports.callCouchDB(url, function(data) {
             var jsonResponse = {bib: bib, "checkpoints": []};
             try {
