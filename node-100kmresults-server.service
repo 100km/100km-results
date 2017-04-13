@@ -1,0 +1,22 @@
+[Unit]
+Description=100 km node js server
+Requires=After=nginx.service       # Requires the nginx service to run first
+
+[Service]
+# Start application if need collection application log to one file
+ExecStart=/bin/sh -c '/usr/bin/nodejs /usr/local/var/lib/node/100km-results/app.js
+# If applicatuion have other system collection logs, can usage short run string
+# ExecStart=/usr/bin/nodejs <application_path>/server/index.js
+Restart=always
+RestartSec=10                       # Restart service after 10 seconds if node service crashes
+StandardOutput=syslog               # Output to syslog
+StandardError=syslog                # Output to syslog
+SyslogIdentifier=node-100km
+User=www-data
+Group=www-data
+#Environment= NODE_ENV=production    # Also can add other environment like DEBUG=* DEBUG_FD=1
+Environment= NODE_ENV=debug    # Also can add other environment like DEBUG=* DEBUG_FD=1
+WorkingDirectory=/usr/local/var/lib/node/100km-results
+
+[Install]
+WantedBy=multi-user.target
