@@ -3,7 +3,6 @@
 (function() {
     "use strict";
 
-    var Knex = require('knex');
     var fs = require('fs');
 
     var createDB = function(path, callback) {
@@ -25,12 +24,13 @@
     };
 
     var initDB = function(path, callback) {
-        exports.DB = Knex.initialize({
-            client: 'sqlite3',
-            connection: {
-                filename: path
-            }
+        exports.DB = require('knex')({
+          client: 'sqlite3',
+          connection: {
+            filename: path
+          }
         });
+          
         callback();
     };
     exports.initDB = initDB;
@@ -51,14 +51,14 @@
         getTeam(teamname, function(data) {
             if(Object.keys(data).length === 0) {
                 exports.DB('teams').insert({teamname: teamname, bibs: bibs, names: names })
-                .exec(function(err, reps) {
+                .asCallback(function(err, reps) {
                     if (err) throw err;
                     callback(reps);
                 });
             }
             else {
                 exports.DB('teams').where('teamname', '=', teamname).update({'bibs': bibs, 'names': names})
-                .exec(function(err, reps) {
+                .asCallback(function(err, reps) {
                     if (err) throw err;
                     callback();
                 });
@@ -67,8 +67,8 @@
     };
 
     var getTeam = function(name, callback) {
-        exports.DB('teams').select('teamname', 'bibs', 'names').where('teamname', '=', name)
-        .exec(function(err, resp) {
+        exports.DB('teams').where('teamname', '=', name).select('teamname', 'bibs', 'names')
+        .asCallback(function(err, resp) {
             if (err) throw err;
             callback(resp[0] || {});
         });
@@ -76,7 +76,7 @@
     exports.getTeam = getTeam;
 
     exports.getTeamsNames = function (callback) {
-        exports.DB('teams').select('teamname').where('bibs', '!=', '[]').exec(function(err, resp) {
+        exports.DB('teams').where('bibs', '!=', '[]').select('teamname').asCallback(function(err, resp) {
             if (err) throw err;
             callback({'teams': resp || []});
         });
