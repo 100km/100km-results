@@ -5,7 +5,7 @@
 
     var utils = require('./utils.js');
     var database = require('./database.js');
-    var http = require('http');
+    var https = require('https');
     var async = require('async');
 
     exports.url100km = utils.defaultOptions['100kmUrl'];
@@ -203,7 +203,7 @@
     };
 
     exports.callCouchDB = function(uri, callback) {
-        http.get(exports.url100km + uri, function(response) {
+        https.get(exports.url100km + uri, function(response) {
             var body = "";
             response.on('data', function (chunk) {
                 body += chunk;
