@@ -70,7 +70,7 @@
         utils.getContentOf(templatePath, function (source) {
             var template = Handlebars.compile(source);
             var result = template(data);
-            if(templatePath === utils.TEMPLATES_DIR + MAPPING['results'].template) {
+            if(templatePath === utils.TEMPLATES_DIR + MAPPING.results.template) {
                 result += '<script type="text/javascript"> var persons = '+JSON.stringify(data)+'</script>';
             }
             callback(result);
