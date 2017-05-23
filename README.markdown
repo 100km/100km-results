@@ -15,6 +15,7 @@ To install on prod:
 
 ```bash
 git clone git@github.com:tmichelet/100km-results.git && cd 100km-results
+# copy and edit ./src/server/local_utils.js.tpl to ./src/server/local_utils.js
 npm install --production
 ./grunt.sh create-database
 ./grunt.sh watch
