@@ -21,7 +21,7 @@
 
     var defaultOptions = {
         port: 15000,
-        host: 'localhost',
+        host: '0.0.0.0',
         databasePath: './100km.sqlite',
         logfilePath: './logs.txt',
         '100kmUrl': local_utils.localOptions['100kmUrl']
