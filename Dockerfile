@@ -1,6 +1,10 @@
 FROM digitallyseamless/nodejs-bower-grunt:0.12
 
-COPY . /app
+COPY src /app/src
+ADD gruntfile.js /app
+ADD grunt.sh /app
+ADD package.json /app
+ADD parse-logs.py /app
 WORKDIR /app
 RUN npm install --production
 RUN cp src/server/local_utils.js.tpl src/server/local_utils.js
